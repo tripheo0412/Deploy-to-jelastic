@@ -8,9 +8,9 @@ const flash = require("connect-flash")
 const session = require("express-session")
 const DB = require("./modules/database")
 const helmet = require('helmet')
-app.use(helmet({ieNoOpen: false}))
-const app = express()
 
+const app = express()
+app.use(helmet({ieNoOpen: false}))
 // Passport Config
 require("./config/passport")(passport)
 
