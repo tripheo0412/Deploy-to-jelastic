@@ -10,20 +10,20 @@ const DB = require("./modules/database")
 const helmet = require('helmet')
 
 const app = express()
-// app.use(helmet({ieNoOpen: false}))
+app.use(helmet({ieNoOpen: false}))
 // // Passport Config
 require("./config/passport")(passport)
 
-// app.enable('trust proxy')
-// app.use ((req, res, next) => {
-//   if (req.secure) {
-//     // request was via https, so do no special handling
-//     next();
-//   } else {
-//     // request was via http, so redirect to https
-//     res.redirect('https://' + req.headers.host + req.url);
-//   }
-// })
+app.enable('trust proxy')
+app.use ((req, res, next) => {
+  if (req.secure) {
+    // request was via https, so do no special handling
+    next();
+  } else {
+    // request was via http, so redirect to https
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+})
 // Connect to MongoDB
 
 mongoose
