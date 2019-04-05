@@ -10,20 +10,20 @@ const DB = require("./modules/database")
 const helmet = require('helmet')
 
 const app = express()
-app.use(helmet({ieNoOpen: false}))
-// Passport Config
+// app.use(helmet({ieNoOpen: false}))
+// // Passport Config
 require("./config/passport")(passport)
 
-app.enable('trust proxy')
-app.use ((req, res, next) => {
-  if (req.secure) {
-    // request was via https, so do no special handling
-    next();
-  } else {
-    // request was via http, so redirect to https
-    res.redirect('https://' + req.headers.host + req.url);
-  }
-})
+// app.enable('trust proxy')
+// app.use ((req, res, next) => {
+//   if (req.secure) {
+//     // request was via https, so do no special handling
+//     next();
+//   } else {
+//     // request was via http, so redirect to https
+//     res.redirect('https://' + req.headers.host + req.url);
+//   }
+// })
 // Connect to MongoDB
 
 mongoose
@@ -78,4 +78,4 @@ app.use("/", require("./routes/index.js"))
 app.use("/users", require("./routes/usersRouter.js"))
 app.use("/spy", spyRouter)
 
-app.listen(5000)
+app.listen(3000)
